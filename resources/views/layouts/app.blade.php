@@ -68,10 +68,15 @@
     </div>
   </nav>
 
-  @yield('content')
+  <div class="container">
+    <div class="row">
+      @yield('content')
+    </div>
+  </div>
 </div>
 
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/ajax.js') }}"></script>
 </body>
 </html>
