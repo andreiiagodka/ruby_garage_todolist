@@ -10,14 +10,13 @@
             </div>
             <div class="col-lg-3"></div>
             <div class="col-lg-1">
-              <!-- {{ Form::open(['route' => ['projects.edit', $project->id], 'method' => 'get']) }}
-              {{ Form::submit('Edit', ['class' => 'btn btn-success btn-xs']) }}
-              {{ Form::close() }} -->
-              <button type="button" name="button" class="btn btn-default btn-xs" data-toggle="modal" data-target="#edit_project_modal">Edit</button>
+              {{ Form::open(['route' => ['projects.edit', $project->id], 'class' => 'edit-project-form-js']) }}
+                <button type="submit" class="btn btn-default btn-xs button-open-edit-project-modal-js" data-toggle="modal" data-target="#edit_project_modal">Edit</button>
+              {{ Form::close() }}
             </div>
             <div class="col-lg-1">
-              {{ Form::open(['route' => ['projects.destroy', $project->id], 'class' => 'delete_project_form']) }}
-              {{ Form::submit('Delete', ['class' => 'btn btn-danger btn-xs button-delete-project-js']) }}
+              {{ Form::open(['route' => ['projects.destroy', $project->id], 'class' => 'destroy_project_form-js']) }}
+                <button type="button" class="btn btn-danger btn-xs button-destroy-project-js">Delete</button>
               {{ Form::close() }}
             </div>
           </div>

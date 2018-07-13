@@ -45,39 +45,23 @@ class ProjectController extends Controller
     //
   }
 
-  /**
-  * Show the form for editing the specified resource.
-  *
-  * @param  int  $id
-  * @return \Illuminate\Http\Response
-  */
   public function edit($id)
   {
-    return Project::find($id);
+    $project = Project::find($id);
+    $contents = view('projects.edit-modal', compact('project'))->render();
+    return response()->json(['contents' => $contents]);
   }
 
-  /**
-  * Update the specified resource in storage.
-  *
-  * @param  \Illuminate\Http\Request  $request
-  * @param  int  $id
-  * @return \Illuminate\Http\Response
-  */
   public function update(Request $request, $id)
   {
-    //
+    $project = Project::find($id);
+    $project->name = $request->name;
+    $project->update();
   }
 
-  /**
-  * Remove the specified resource from storage.
-  *
-  * @param  int  $id
-  * @return \Illuminate\Http\Response
-  */
   public function destroy($id)
   {
     $project = Project::find($id);
     $project->delete();
-    return redirect('/projects');
   }
 }
