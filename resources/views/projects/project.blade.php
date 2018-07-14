@@ -11,7 +11,7 @@
             <div class="col-lg-3"></div>
             <div class="col-lg-1">
               {{ Form::open(['route' => ['projects.edit', $project->id], 'class' => 'edit-project-form-js']) }}
-                <button type="submit" class="btn btn-default btn-xs button-open-edit-project-modal-js" data-toggle="modal" data-target="#edit_project_modal">Edit</button>
+                <button type="button" class="btn btn-default btn-xs button-open-edit-project-modal-js" data-toggle="modal" data-target="#edit_project_modal">Edit</button>
               {{ Form::close() }}
             </div>
             <div class="col-lg-1">

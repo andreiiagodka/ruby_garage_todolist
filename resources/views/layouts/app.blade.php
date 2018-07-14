@@ -78,5 +78,6 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/ajax.js') }}"></script>
+<script src="{{ asset('js/project-ajax.js') }}"></script>
 </body>
 </html>

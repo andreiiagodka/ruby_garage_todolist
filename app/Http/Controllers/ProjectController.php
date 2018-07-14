@@ -34,15 +34,9 @@ class ProjectController extends Controller
     return response()->json(['contents' => $contents]);
   }
 
-  /**
-  * Display the specified resource.
-  *
-  * @param  int  $id
-  * @return \Illuminate\Http\Response
-  */
   public function show($id)
   {
-    //
+    
   }
 
   public function edit($id)
