@@ -8,4 +8,5 @@
     @endforeach
   </div>
   @include('projects.modals')
+  @include('tasks.modals')
 @endsection

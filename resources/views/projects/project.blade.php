@@ -11,7 +11,8 @@
             <div class="col-lg-3"></div>
             <div class="col-lg-1">
               {{ Form::open(['route' => ['projects.edit', $project->id], 'class' => 'edit-project-form-js']) }}
-                <button type="button" class="btn btn-default btn-xs button-open-edit-project-modal-js" data-toggle="modal" data-target="#edit_project_modal">Edit</button>
+                {{ Form::button('Edit', ['class' => 'btn btn-default btn-xs test button-open-edit-project-modal-js', 'data-toggle' => 'modal', 'data-target' => '#edit_project_modal']) }}
+                <!-- <button type="button" class="btn btn-default btn-xs button-open-edit-project-modal-js" data-toggle="modal" data-target="#edit_project_modal">Edit</button> -->
               {{ Form::close() }}
             </div>
             <div class="col-lg-1">
@@ -24,7 +25,13 @@
       </div>
     </div>
     <div class="panel-body">
-      Panel content
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            @include('tasks.index')
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
