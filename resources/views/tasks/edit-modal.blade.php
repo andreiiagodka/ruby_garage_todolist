@@ -2,7 +2,7 @@
   <div class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      <h4 class="modal-title text-center" id="edit_project_modal_label">Edit your task</h4>
+      <h4 class="modal-title text-center" id="edit_task_modal_label">Edit your task</h4>
     </div>
     {{ Form::open(['route' => ['tasks.update', $task->id], 'class' => 'update_task_form-js']) }}
     <div class="modal-body">

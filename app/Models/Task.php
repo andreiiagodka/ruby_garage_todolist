@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Models;
+  namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+  use Illuminate\Database\Eloquent\Model;
 
-class Task extends Model
-{
-    //
-}
+  class Task extends Model
+  {
+    protected $fillable = ['position'];
+
+    public function project() {
+      return $this->belongsTo(Project::class);
+    }
+  }

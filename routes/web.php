@@ -9,6 +9,9 @@
   Route::get('/home', 'HomeController@index')->name('home');
 
   Route::resource('projects', 'ProjectController');
-  
+
   Route::resource('tasks', 'TaskController');
+
   Route::post('tasks/{task}/status', 'TaskController@status')->name('tasks.status');
+  Route::post('tasks/{task}/position-up', 'TaskController@positionUp')->name('tasks.position-up');
+  Route::post('tasks/{task}/position-down', 'TaskController@positionDown')->name('tasks.position-down');

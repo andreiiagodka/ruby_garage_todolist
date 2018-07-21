@@ -18,7 +18,8 @@
         </div>
       </div>
       <div class="modal-footer">
-        {{ Form::submit('Create', ['class' => 'btn btn-success button-store-project-js']) }}
+        <button type="button" class="btn btn-success button-store-project-js">Update</button>
+        <!-- {{ Form::submit('Create', ['class' => 'btn btn-success button-store-project-js']) }} -->
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     {{ Form::close() }}

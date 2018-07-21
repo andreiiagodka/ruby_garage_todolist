@@ -1,6 +1,4 @@
 @include('tasks.create')
 <ul class="list-group todolist-tasks-js">
-  @foreach ($project->tasks as $task)
-    @include('tasks.task')
-  @endforeach
+  @each('tasks.task', $project->tasks->sortBy('position'), 'task')
 </ul>

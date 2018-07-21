@@ -24,6 +24,7 @@ function handleDestroyResponse(field) {
 function hideModal(modal_id) {
   $(modal_id).empty();
   $(modal_id).modal('hide');
+  $('.modal-backdrop').remove();
 }
 
 function emptyHiddenModal(modal_id) {

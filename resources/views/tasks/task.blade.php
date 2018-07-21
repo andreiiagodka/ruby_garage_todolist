@@ -1,4 +1,4 @@
-<li class="list-group-item div-task-js">
+<li class="list-group-item div-task-js" task_id="{{ $task->id }}" position="{{ $task->position }}">
   <div class="container-fluid">
     <div class="row">
       @if ($task->status == 1)
@@ -6,8 +6,34 @@
       @else
         <div class="col-lg-12 bg-task-js">
       @endif
-        <div class="col-lg-9 task-name-js">
+        {{ Form::open(['route' => ['tasks.show', $task->id], 'class' => 'show-task-form-js']) }}
+        <div class="col-lg-7 task-name-js">
           {{ $task->name }}
+        </div>
+        {{ Form::close() }}
+        <div class="col-lg-1">
+          {{ Form::open(['route' => ['tasks.position-up', $task->id], 'class' => 'position-up-task-form-js']) }}
+            @php
+              $min_position = $task->project->tasks->pluck('position')->min();
+            @endphp
+            @if ($task->position == $min_position)
+              <button type="button" class="btn btn-default btn-xs button-position-up-task-js" style="display: none;">Up</button>
+            @else
+              <button type="button" class="btn btn-default btn-xs button-position-up-task-js">Up</button>
+            @endif
+          {{ Form::close() }}
+        </div>
+        <div class="col-lg-1">
+          {{ Form::open(['route' => ['tasks.position-down', $task->id], 'class' => 'position-down-task-form-js']) }}
+            @php
+              $max_position = $task->project->tasks->pluck('position')->max();
+            @endphp
+            @if ($task->position == $max_position)
+              <button type="button" class="btn btn-default btn-xs button-position-down-task-js" style="display: none;">Down</button>
+            @else
+              <button type="button" class="btn btn-default btn-xs button-position-down-task-js">Down</button>
+            @endif
+          {{ Form::close() }}
         </div>
         <div class="col-lg-1">
           {{ Form::open(['route' => ['tasks.status', $task->id], 'class' => 'status-task-form-js']) }}
