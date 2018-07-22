@@ -58,7 +58,13 @@
     public function destroy($id)
     {
       $task = Task::find($id);
+
+      $min_position = $task->project->tasks->pluck('position')->min();
+      $max_position = $task->project->tasks->pluck('position')->max();
+
       $task->delete();
+
+      return response()->json(['task_position' => $task->position, 'min_position' => $min_position, 'max_position' => $max_position]);
     }
 
     public function status(Request $request, $id) {

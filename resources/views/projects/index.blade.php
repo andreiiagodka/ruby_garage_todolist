@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-  @include('projects.button')
-  <div class="todolist-projects-js">
+  @include('projects.create-button')
+  <div class="todolist-projects-container-js">
     @foreach ($projects as $project)
       @include('projects.project', ['min_position' => 'min_position'])
     @endforeach

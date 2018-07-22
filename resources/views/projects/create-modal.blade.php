@@ -4,7 +4,7 @@
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <h4 class="modal-title text-center" id="create_project_modal_label">Create new TODO List</h4>
     </div>
-    {{ Form::open(['route' => 'projects.store', 'class' => 'store_project_form-js']) }}
+    {{ Form::open(['route' => 'projects.store', 'class' => 'store-project-form-js']) }}
       <div class="modal-body">
         <div class="container-fluid">
           <div class="row">
@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success button-store-project-js">Create</button>
+        <button type="button" class="btn btn-success btn-store-project-js">Create</button>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     {{ Form::close() }}

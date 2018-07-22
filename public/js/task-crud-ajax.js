@@ -34,7 +34,7 @@ function store() {
 
 function addBtnDownOnStore(tasks_container, position) {
   let prev_task_position = position - 1;
-  let prev_task = tasks_container.find('[position=' + prev_task_position + ']');
+  let prev_task = $(tasks_container).find('[position=' + prev_task_position + ']');
   if (prev_task) {
     let btn_down = prev_task.find('.btn-position-down-task-js');
     btn_down.show();
@@ -45,7 +45,7 @@ function show() {
   $(document).on('click', '.task-name-container-js', function() {
     let modal = $('#show_task_modal');
     let form = $(this).closest('.show-task-form-js');
-    let action = $(form).attr('action');
+    let action = form.attr('action');
     $.ajax({
       url: action,
       type: 'GET',
@@ -74,7 +74,7 @@ function edit() {
         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
       },
       success: function(data) {
-        $(modal).append(data.contents);
+        modal.append(data.contents);
         update(task_name_container, modal);
         emptyHiddenModal(modal);
       }
@@ -98,8 +98,32 @@ function destroy() {
   $(document).on('click', '.btn-destroy-task-js', function() {
     let form = $(this).closest('.destroy-task-form-js');
     let action = form.attr('action');
-    let method = 'DELETE';
     let task_container = this.closest('.task-container-js');
-    ajaxRequest(action, method, null, handleDestroyResponse(task_container));
+    $.ajax({
+      url: action,
+      type: 'DELETE',
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function(data) {
+        addBtnUpDownOnDestroy(task_container, data);
+        handleDestroyResponse(task_container);
+      }
+    });
   });
+}
+
+function addBtnUpDownOnDestroy(task_container, data) {
+  let tasks_container = task_container.closest('.todolist-tasks-container-js');
+  if (data.task_position == data.min_position) {
+    let next_task_position = data.task_position + 1;
+    let next_task = $(tasks_container).find('[position=' + next_task_position + ']');
+    let btn_up = next_task.find('.btn-position-up-task-js');
+    btn_up.hide();
+  } else if (data.task_position == data.max_position) {
+    let prev_task_position = data.task_position - 1;
+    let prev_task = $(tasks_container).find('[position=' + prev_task_position + ']');
+    let btn_down = prev_task.find('.btn-position-down-task-js');
+    btn_down.hide();
+  }
 }

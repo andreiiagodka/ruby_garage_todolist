@@ -12,13 +12,13 @@ function ajaxRequest(action, method, data, handleResponse) {
   });
 }
 
-function handleUpdateResponse(title, input_name, modal) {
-  $(title).html(input_name);
+function handleUpdateResponse(name_container, name, modal) {
+  $(name_container).html(name);
   hideModal(modal);
 }
 
-function handleDestroyResponse(field) {
-  field.remove();
+function handleDestroyResponse(container) {
+  container.remove();
 }
 
 function hideModal(modal_id) {
