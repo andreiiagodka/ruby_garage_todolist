@@ -4,6 +4,7 @@
 
   use Illuminate\Http\Request;
   use App\Models\Task;
+  use Carbon\Carbon;
 
   class TaskController extends Controller
   {
@@ -25,6 +26,7 @@
       $task = new Task;
       $task->name = $request->name;
       $task->position = $max_position + 1;
+      $task->deadline = Carbon::now()->addDay();
       $task->project_id = $project_id;
       $task->save();
 
@@ -94,5 +96,16 @@
       $max_position = $current_task->project->tasks->pluck('position')->max();
 
       return response()->json(['min_position' => $min_position, 'max_position' => $max_position]);
+    }
+
+    public function deadlineEdit($id) {
+      $task = Task::find($id);
+      $contents = view('tasks.edit-deadline', compact('task'))->render();
+      return response()->json(['contents' => $contents]);
+    }
+
+    public function deadlineUpdate(Request $request, $id) {
+      $task = Task::find($id);
+      $task->update(['deadline' => $request->deadline]);
     }
   }
