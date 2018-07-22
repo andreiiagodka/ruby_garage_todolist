@@ -25,10 +25,10 @@
                   </tr>
                   <tr>
                     <th>Deadline</th>
-                    <td class="deadline-container-js">
-                      <span class="span-deadline-js">{{ $task->deadline }}</span>
+                    <td class="deadline-info-js">
+                      <span class="deadline-js">{{ $task->deadline }}</span>
                       {{ Form::open(['route' => ['tasks.deadline.edit', $task->id], 'class' => 'edit-task-deadline-form-js']) }}
-                        <button type="button" class="btn btn-default btn-xs btn-edit-task-deadline-task-js">Edit</button>
+                        <button type="button" class="btn btn-default btn-xs btn-edit-task-deadline-js">Edit</button>
                       {{ Form::close() }}
                     </td>
                   </tr>

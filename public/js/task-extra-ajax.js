@@ -106,12 +106,11 @@ function positionDown() {
 }
 
 function deadlineEdit() {
-  $(document).on('click', '.btn-edit-task-deadline-task-js', function() {
+  $(document).on('click', '.btn-edit-task-deadline-js', function() {
+    let btn_edit = $(this);
     let form = $(this).closest('.edit-task-deadline-form-js');
     let action = form.attr('action');
-
-    let btn_edit = $(this);
-    let deadline_area = form.closest('.deadline-container-js');
+    let deadline_info = form.closest('.deadline-info-js');
     $.ajax({
       url: action,
       type: 'GET',
@@ -119,36 +118,31 @@ function deadlineEdit() {
         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
       },
       success: function(data) {
-        deadline_area.append(data.contents);
+        deadline_info.append(data.contents);
         btn_edit.hide();
-        deadlineUpdate(deadline_area, btn_edit);
+        deadlineUpdate(deadline_info, btn_edit);
       }
     });
   });
 }
 
-function deadlineUpdate(deadline_area, btn_edit) {
-  $(document).on('click', '.btn-update-task-deadline-task-js', function() {
+function deadlineUpdate(deadline_info, btn_edit) {
+  $(document).on('click', '.btn-update-task-deadline-js', function() {
     let form = $(this).closest('.update-task-deadline-form-js');
     let action = form.attr('action');
-    let deadline = form.find('.deadline-input-js').val();
-    $.ajax({
-      url: action,
-      type: 'POST',
-      data: {
-        deadline: deadline
-      },
-      headers: {
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-      },
-      success: function(data) {
-        let date = new Date(deadline);
-        let new_deadline = date.toLocaleDateString() + ' ' + (date.toLocaleTimeString()).slice(0, -3);
-        let deadline_span = deadline_area.find('.span-deadline-js');
-        deadline_span.html(new_deadline);
-        deadline_area.find('.div-deadline-js').remove();
-        btn_edit.show();
-      }
-    });
+    let deadline = form.find('.deadline-update-input-js').val();
+    let data = {
+      deadline: deadline
+    };
+    ajaxRequest(action, 'POST', data, handleDeadlineUpdateResponse(deadline, deadline_info, btn_edit));
   });
+}
+
+function handleDeadlineUpdateResponse(deadline, deadline_info, btn_edit) {
+  let date = new Date(deadline);
+  let new_deadline = date.toLocaleDateString() + ' ' + (date.toLocaleTimeString()).slice(0, -3);
+  let deadline_span = deadline_info.find('span.deadline-js');
+  deadline_span.html(new_deadline);
+  deadline_info.find('.deadline-form-container-js').remove();
+  btn_edit.show();
 }
