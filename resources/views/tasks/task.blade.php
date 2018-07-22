@@ -1,4 +1,4 @@
-<li class="list-group-item div-task-js" task_id="{{ $task->id }}" position="{{ $task->position }}">
+<li class="list-group-item task-container-js" task_id="{{ $task->id }}" position="{{ $task->position }}">
   <div class="container-fluid">
     <div class="row">
       @if ($task->status == 1)
@@ -17,9 +17,9 @@
               $min_position = $task->project->tasks->pluck('position')->min();
             @endphp
             @if ($task->position == $min_position)
-              <button type="button" class="btn btn-default btn-xs button-position-up-task-js" style="display: none;">Up</button>
+              <button type="button" class="btn btn-default btn-xs btn-position-up-task-js" style="display: none;">Up</button>
             @else
-              <button type="button" class="btn btn-default btn-xs button-position-up-task-js">Up</button>
+              <button type="button" class="btn btn-default btn-xs btn-position-up-task-js">Up</button>
             @endif
           {{ Form::close() }}
         </div>
@@ -29,9 +29,9 @@
               $max_position = $task->project->tasks->pluck('position')->max();
             @endphp
             @if ($task->position == $max_position)
-              <button type="button" class="btn btn-default btn-xs button-position-down-task-js" style="display: none;">Down</button>
+              <button type="button" class="btn btn-default btn-xs btn-position-down-task-js" style="display: none;">Down</button>
             @else
-              <button type="button" class="btn btn-default btn-xs button-position-down-task-js">Down</button>
+              <button type="button" class="btn btn-default btn-xs btn-position-down-task-js">Down</button>
             @endif
           {{ Form::close() }}
         </div>

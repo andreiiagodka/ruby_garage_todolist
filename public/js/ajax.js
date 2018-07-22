@@ -1,4 +1,4 @@
-function ajaxRequest(action, method, data, handleResponse, field = null) {
+function ajaxRequest(action, method, data, handleResponse) {
   $.ajax({
     url: action,
     type: method,
@@ -31,4 +31,9 @@ function emptyHiddenModal(modal_id) {
   $(modal_id).on('hidden.bs.modal', function () {
     $(modal_id).empty();
   });
+}
+
+function btnHideShow(btn_hide, btn_show) {
+  btn_hide.hide();
+  btn_show.show();
 }
