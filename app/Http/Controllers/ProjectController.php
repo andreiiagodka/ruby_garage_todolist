@@ -36,7 +36,9 @@ class ProjectController extends Controller
 
   public function show($id)
   {
-
+    $project = Project::find($id);
+    $contents = view('projects.show-modal', compact('project'))->render();
+    return response()->json(['contents' => $contents]);
   }
 
   public function edit($id)

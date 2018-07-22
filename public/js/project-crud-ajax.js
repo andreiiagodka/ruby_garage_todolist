@@ -1,6 +1,24 @@
 $(document).ready(function() {
   create();
 
+  $(document).on('click', '.project-name-container-js', function() {
+    let modal = $('#show_project_modal')
+
+    let form = $(this).closest('.show-project-form-js');
+    let action = form.attr('action');
+    $.ajax({
+      url: action,
+      type: 'GET',
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function(data) {
+        modal.append(data.contents);
+        emptyHiddenModal(modal);
+      }
+    });
+  });
+
   $(document).on('click', '.btn-open-edit-project-modal-js', function() {
     let modal = $('#edit_project_modal');
 

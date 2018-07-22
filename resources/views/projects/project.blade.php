@@ -5,9 +5,11 @@
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="col-lg-5"></div>
-            <div class="col-lg-2 text-center">
+            {{ Form::open(['route' => ['projects.show', $project->id], 'class' => 'show-project-form-js']) }}
+            <div class="col-lg-2 text-center project-name-container-js" data-toggle="modal" data-target="#show_project_modal">
               <span class="h1 panel-title">{{ $project->name }}</span>
             </div>
+            {{ Form::close() }}
             <div class="col-lg-3"></div>
             <div class="col-lg-1">
               {{ Form::open(['route' => ['projects.edit', $project->id], 'class' => 'edit-project-form-js']) }}
