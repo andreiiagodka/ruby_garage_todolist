@@ -37,7 +37,7 @@
         </div>
         <div class="col-lg-1">
           {{ Form::open(['route' => ['tasks.status', $task->id], 'class' => 'status-task-form-js']) }}
-            {{ Form::checkbox('task_status', '', $task->status, ['class' => 'checkbox-set-status-task-js']) }}
+            {{ Form::checkbox('task_status', '', $task->status, ['class' => 'cbx-status-task-js']) }}
           {{ Form::close() }}
         </div>
         <div class="col-lg-1">
