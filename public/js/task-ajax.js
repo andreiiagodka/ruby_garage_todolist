@@ -1,11 +1,36 @@
 $(document).ready(function() {
-  store();
+  // store();
   show();
   edit();
   destroy();
   status();
   positionUp();
   positionDown();
+
+  $(document).on('click', '.button-store-task-js', function(e) {
+    e.preventDefault();
+    let tasks_area = $(this).closest('.task-row-js').next('.todolist-tasks-js');
+    let form = this.closest('.store_task_form-js');
+    let action = $(form).attr('action');
+    let input = $(form).find('input[name=store_task_name]');
+    let name = input.val();
+    let project_id = $(form).attr('project_id');
+    $.ajax({
+      url: action,
+      type: 'POST',
+      data: {
+        name: name,
+        project_id: project_id
+      },
+      headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      }
+    }).done(function(data) {
+      tasks_area.append(data.contents);
+      input.val('');
+      addButtonDownOnStore(tasks_area, data.task_position);
+    });
+  });
 });
 
 function store() {
@@ -30,8 +55,18 @@ function store() {
     }).done(function(data) {
       tasks_area.append(data.contents);
       input.val('');
+      addButtonDownOnStore(tasks_area, data.task_position);
     });
   });
+}
+
+function addButtonDownOnStore(tasks_area, position) {
+  let prev_task_position = position - 1;
+  let prev_task = tasks_area.find('[position=' + prev_task_position + ']');
+  if (prev_task) {
+    let button_down = prev_task.find('.button-position-down-task-js');
+    button_down.show();
+  }
 }
 
 function show() {

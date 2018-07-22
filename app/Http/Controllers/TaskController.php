@@ -29,7 +29,7 @@
       $task->save();
 
       $contents = view('tasks.task', compact('task'))->render();
-      return response()->json(['contents' => $contents]);
+      return response()->json(['contents' => $contents, 'task_position' => $task->position]);
     }
 
     public function show($id)
@@ -92,7 +92,7 @@
 
       $min_position = $current_task->project->tasks->pluck('position')->min();
       $max_position = $current_task->project->tasks->pluck('position')->max();
-      
+
       return response()->json(['min_position' => $min_position, 'max_position' => $max_position]);
     }
   }
