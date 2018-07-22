@@ -4,7 +4,7 @@
       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       <h4 class="modal-title text-center" id="edit_task_modal_label">Edit your task</h4>
     </div>
-    {{ Form::open(['route' => ['tasks.update', $task->id], 'class' => 'update_task_form-js']) }}
+    {{ Form::open(['route' => ['tasks.update', $task->id], 'class' => 'update-task-form-js']) }}
     <div class="modal-body">
       <div class="container-fluid">
         <div class="row">
@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="modal-footer">
-      {{ Form::submit('Update', ['class' => 'btn btn-success button-update-task-js']) }}
+      <button type="button" class="btn btn-success btn-update-task-js">Update</button>
       <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
     </div>
     {{ Form::close() }}

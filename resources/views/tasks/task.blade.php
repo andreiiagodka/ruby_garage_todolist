@@ -7,8 +7,8 @@
         <div class="col-lg-12 bg-task-js">
       @endif
         {{ Form::open(['route' => ['tasks.show', $task->id], 'class' => 'show-task-form-js']) }}
-        <div class="col-lg-7 task-name-js">
-          {{ $task->name }}
+        <div class="col-lg-7 task-name-container-js" data-toggle="modal" data-target="#show_task_modal">
+          <span class="task-name-js">{{ $task->name }}</span>
         </div>
         {{ Form::close() }}
         <div class="col-lg-1">
@@ -42,12 +42,12 @@
         </div>
         <div class="col-lg-1">
           {{ Form::open(['route' => ['tasks.edit', $task->id], 'class' => 'edit-task-form-js']) }}
-            <button type="button" class="btn btn-default btn-xs button-open-edit-task-modal-js" data-toggle="modal" data-target="#edit_task_modal">Edit</button>
+            <button type="button" class="btn btn-default btn-xs btn-open-edit-task-modal-js" data-toggle="modal" data-target="#edit_task_modal">Edit</button>
           {{ Form::close() }}
         </div>
         <div class="col-lg-1">
-          {{ Form::open(['route' => ['tasks.destroy', $task->id], 'class' => 'destroy_task_form-js']) }}
-            <button type="button" class="btn btn-danger btn-xs button-destroy-task-js">Delete</button>
+          {{ Form::open(['route' => ['tasks.destroy', $task->id], 'class' => 'destroy-task-form-js']) }}
+            <button type="button" class="btn btn-danger btn-xs btn-destroy-task-js">Delete</button>
           {{ Form::close() }}
         </div>
       </div>
