@@ -37,42 +37,33 @@
 
     public function show($id)
     {
-      $task = Task::find($id);
-      $contents = view('tasks.show-modal', compact('task'))->render();
-      return response()->json(['contents' => $contents]);
+      return $this->handleShowEditResponse($id, 'tasks.show-modal');
     }
 
     public function edit($id)
     {
-      $task = Task::find($id);
-      $contents = view('tasks.edit-modal', compact('task'))->render();
-      return response()->json(['contents' => $contents]);
+      return $this->handleShowEditResponse($id, 'tasks.edit-modal');
     }
 
     public function update(Request $request, $id)
     {
       $task = Task::find($id);
       if (!$task->isAuthorizedUser($task)) return;
-      $task->name = $request->name;
-      $task->update();
+      $task->update(['name' => $request->name]);
     }
 
     public function destroy($id)
     {
       $task = Task::find($id);
       if (!$task->isAuthorizedUser($task)) return;
-      $min_position = $task->project->tasks->pluck('position')->min();
-      $max_position = $task->project->tasks->pluck('position')->max();
-
       $task->delete();
-
-      return response()->json(['task_position' => $task->position, 'min_position' => $min_position, 'max_position' => $max_position]);
+      return $this->renderTaskPositions($task);
     }
 
     public function status(Request $request, $id) {
       $task = Task::find($id);
       if (!$task->isAuthorizedUser($task)) return;
-      ($request->status == 0) ? $task->status = 1 : $task->status = 0;
+      $task->status = int_val($request->status == 0);
       $task->update();
       return $task->status;
     }
@@ -82,15 +73,12 @@
       $prev_task = Task::find($request->prev_task_id);
 
       if (!$current_task->isAuthorizedUser($current_task)) return;
-      $current_task_position = $current_task->position;
 
+      $current_task_position = $current_task->position;
       $current_task->update(['position' => $prev_task->position]);
       $prev_task->update(['position' => $current_task_position]);
 
-      $min_position = $current_task->project->tasks->pluck('position')->min();
-      $max_position = $current_task->project->tasks->pluck('position')->max();
-
-      return response()->json(['min_position' => $min_position, 'max_position' => $max_position]);
+      return $this->renderTaskPositions($current_task);
     }
 
     public function positionDown(Request $request, $id) {
@@ -98,20 +86,18 @@
       $next_task = Task::find($request->next_task_id);
 
       if (!$current_task->isAuthorizedUser($current_task)) return;
-      $current_task_position = $current_task->position;
 
+      $current_task_position = $current_task->position;
       $current_task->update(['position' => $next_task->position]);
       $next_task->update(['position' => $current_task_position]);
 
-      $min_position = $current_task->project->tasks->pluck('position')->min();
-      $max_position = $current_task->project->tasks->pluck('position')->max();
-
-      return response()->json(['min_position' => $min_position, 'max_position' => $max_position]);
+      return $this->renderTaskPositions($current_task);
     }
 
     public function deadlineEdit($id) {
       $task = Task::find($id);
       if (!$task->isAuthorizedUser($task)) return;
+
       $contents = view('tasks.edit-deadline', compact('task'))->render();
       return response()->json(['contents' => $contents]);
     }
@@ -120,5 +106,19 @@
       $task = Task::find($id);
       if (!$task->isAuthorizedUser($task)) return;
       $task->update(['deadline' => $request->deadline]);
+    }
+
+    protected function handleShowEditResponse($id, $view) {
+      $task = Task::find($id);
+      $contents = view($view, compact('task'))->render();
+      return response()->json(['contents' => $contents]);
+    }
+
+    protected function renderTaskPositions($task) {
+      return response()->json([
+        'task_position' => $task->position,
+        'min_position' => $task->minPosition($task),
+        'max_position' => $task->maxPosition($task)
+      ]);
     }
   }

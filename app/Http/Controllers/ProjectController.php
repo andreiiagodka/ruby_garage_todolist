@@ -36,16 +36,12 @@ class ProjectController extends Controller
 
   public function show($id)
   {
-    $project = Project::find($id);
-    $contents = view('projects.show-modal', compact('project'))->render();
-    return response()->json(['contents' => $contents]);
+    return $this->handleShowEditResponse($id, 'projects.show-modal');
   }
 
   public function edit($id)
   {
-    $project = Project::find($id);
-    $contents = view('projects.edit-modal', compact('project'))->render();
-    return response()->json(['contents' => $contents]);
+    return $this->handleShowEditResponse($id, 'projects.edit-modal');
   }
 
   public function update(Request $request, $id)
@@ -60,5 +56,11 @@ class ProjectController extends Controller
     $project = Project::find($id);
     if (!$project->isAuthorizedUser($project)) return;
     $project->delete();
+  }
+
+  protected function handleShowEditResponse($id, $view) {
+    $project = Project::find($id);
+    $contents = view($view, compact('project'))->render();
+    return response()->json(['contents' => $contents]);
   }
 }
