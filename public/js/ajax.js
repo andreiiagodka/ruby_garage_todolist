@@ -12,15 +12,6 @@ function ajaxRequest(action, method, data, handleResponse) {
   });
 }
 
-function handleUpdateResponse(name_container, name, modal) {
-  $(name_container).html(name);
-  hideModal(modal);
-}
-
-function handleDestroyResponse(container) {
-  container.remove();
-}
-
 function hideModal(modal_id) {
   $(modal_id).empty();
   $(modal_id).modal('hide');

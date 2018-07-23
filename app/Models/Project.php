@@ -13,8 +13,8 @@
       return $this->hasMany(Task::class);
     }
 
-    public function isAuthorizedUser($project) {
-      $project_user_id = $project->user_id;
+    public function isAuthorizedUser() {
+      $project_user_id = $this->user_id;
       $authorized_user_id = Auth::id();
       return $project_user_id == $authorized_user_id;
     }

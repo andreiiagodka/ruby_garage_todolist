@@ -48,22 +48,22 @@
     public function update(Request $request, $id)
     {
       $task = Task::find($id);
-      if (!$task->isAuthorizedUser($task)) return;
+      if (!$task->isAuthorizedUser()) return;
       $task->update(['name' => $request->name]);
     }
 
     public function destroy($id)
     {
       $task = Task::find($id);
-      if (!$task->isAuthorizedUser($task)) return;
+      if (!$task->isAuthorizedUser()) return;
       $task->delete();
       return $this->renderTaskPositions($task);
     }
 
     public function status(Request $request, $id) {
       $task = Task::find($id);
-      if (!$task->isAuthorizedUser($task)) return;
-      $task->status = int_val($request->status == 0);
+      if (!$task->isAuthorizedUser()) return;
+      $task->status = intval($request->status == 0);
       $task->update();
       return $task->status;
     }
@@ -72,7 +72,7 @@
       $current_task = Task::find($id);
       $prev_task = Task::find($request->prev_task_id);
 
-      if (!$current_task->isAuthorizedUser($current_task)) return;
+      if (!$current_task->isAuthorizedUser()) return;
 
       $current_task_position = $current_task->position;
       $current_task->update(['position' => $prev_task->position]);
@@ -85,7 +85,7 @@
       $current_task = Task::find($id);
       $next_task = Task::find($request->next_task_id);
 
-      if (!$current_task->isAuthorizedUser($current_task)) return;
+      if (!$current_task->isAuthorizedUser()) return;
 
       $current_task_position = $current_task->position;
       $current_task->update(['position' => $next_task->position]);
@@ -96,7 +96,7 @@
 
     public function deadlineEdit($id) {
       $task = Task::find($id);
-      if (!$task->isAuthorizedUser($task)) return;
+      if (!$task->isAuthorizedUser()) return;
 
       $contents = view('tasks.edit-deadline', compact('task'))->render();
       return response()->json(['contents' => $contents]);
@@ -104,7 +104,7 @@
 
     public function deadlineUpdate(Request $request, $id) {
       $task = Task::find($id);
-      if (!$task->isAuthorizedUser($task)) return;
+      if (!$task->isAuthorizedUser()) return;
       $task->update(['deadline' => $request->deadline]);
     }
 

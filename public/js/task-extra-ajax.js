@@ -21,6 +21,7 @@ function status() {
 
 function handleStatusResponse(task_bg) {
   $(task_bg).toggleClass('bg-success');
+  alertSuccess(success_phrases.task_status);
 }
 
 function positionUp() {

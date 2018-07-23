@@ -48,14 +48,25 @@ $(document).ready(function() {
     });
   });
 
+  function handleUpdateResponse(name_container, name, modal) {
+    $(name_container).html(name);
+    hideModal(modal);
+    alertSuccess(success_phrases.project_update);
+  }
+
   $(document).on('click', '.btn-destroy-project-js', function() {
     let form = $(this).closest('.destroy-project-form-js');
     let action = form.attr('action');
     let method = 'DELETE';
     let project_container = this.closest('.project-container-js');
-    ajaxRequest(action, method, null, handleDestroyResponse(project_container));
+    ajaxRequest(action, method, null, handleProjectDestroyResponse(project_container));
   });
 });
+
+function handleProjectDestroyResponse(container) {
+  container.remove();
+  alertSuccess(success_phrases.project_destroy);
+}
 
 function create() {
   $('.btn-open-create-project-modal-js').click(function() {
@@ -86,6 +97,7 @@ function create() {
             success: function (data) {
               projects_container.append(data.contents);
               hideModal(modal);
+              alertSuccess(success_phrases.project_store);
             }
           });
         });

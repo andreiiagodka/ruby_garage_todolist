@@ -28,6 +28,7 @@ function store() {
       tasks_container.append(data.contents);
       store_task_input.val('');
       addBtnDownOnStore(tasks_container, data.task_position);
+      alertSuccess(success_phrases.task_store);
     });
   });
 }
@@ -94,6 +95,12 @@ function update(task_name_container, modal) {
   });
 }
 
+function handleUpdateResponse(name_container, name, modal) {
+  $(name_container).html(name);
+  hideModal(modal);
+  alertSuccess(success_phrases.task_update);
+}
+
 function destroy() {
   $(document).on('click', '.btn-destroy-task-js', function() {
     let form = $(this).closest('.destroy-task-form-js');
@@ -111,6 +118,11 @@ function destroy() {
       }
     });
   });
+}
+
+function handleDestroyResponse(container) {
+  container.remove();
+  alertSuccess(success_phrases.task_destroy);
 }
 
 function addBtnUpDownOnDestroy(task_container, data) {

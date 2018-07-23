@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+  @include('alerts.alert')
   @include('projects.create-button')
   <div class="todolist-projects-container-js">
     @foreach ($projects as $project)

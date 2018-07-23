@@ -78,6 +78,7 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/ajax.js') }}"></script>
+<script src="{{ asset('js/alert.js') }}"></script>
 <script src="{{ asset('js/project-crud-ajax.js') }}"></script>
 <script src="{{ asset('js/task-crud-ajax.js') }}"></script>
 <script src="{{ asset('js/task-extra-ajax.js') }}"></script>
