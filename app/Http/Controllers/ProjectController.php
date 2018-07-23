@@ -50,14 +50,13 @@ class ProjectController extends Controller
 
   public function update(Request $request, $id)
   {
-    $project = Project::find($id);
-    $project->name = $request->name;
-    $project->update();
+    Project::find($id)->update([
+      'name' => $request->name
+    ]);
   }
 
   public function destroy($id)
   {
-    $project = Project::find($id);
-    $project->delete();
+    Project::find($id)->delete();
   }
 }

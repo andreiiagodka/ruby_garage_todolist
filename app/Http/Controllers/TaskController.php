@@ -111,7 +111,6 @@
     }
 
     public function deadlineUpdate(Request $request, $id) {
-      $task = Task::find($id);
-      $task->update(['deadline' => $request->deadline]);
+      Task::find($id)->update(['deadline' => $request->deadline]);
     }
   }
