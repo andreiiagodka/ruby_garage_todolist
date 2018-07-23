@@ -50,13 +50,15 @@ class ProjectController extends Controller
 
   public function update(Request $request, $id)
   {
-    Project::find($id)->update([
-      'name' => $request->name
-    ]);
+    $project = Project::find($id);
+    if (!$project->isAuthorizedUser($project)) return;
+    $project->update(['name' => $request->name]);
   }
 
   public function destroy($id)
   {
-    Project::find($id)->delete();
+    $project = Project::find($id);
+    if (!$project->isAuthorizedUser($project)) return;
+    $project->delete();
   }
 }
