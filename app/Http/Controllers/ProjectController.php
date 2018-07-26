@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Project;
+use App\Http\Requests\Project\StoreProjectRequest;
+use App\Http\Requests\Project\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
@@ -22,7 +24,7 @@ class ProjectController extends Controller
     return response()->json(['contents' => $contents]);
   }
 
-  public function store(Request $request)
+  public function store(StoreProjectRequest $request)
   {
     $id = Auth::id();
     $project = new Project;
@@ -44,7 +46,7 @@ class ProjectController extends Controller
     return $this->handleShowEditResponse($id, 'projects.edit-modal');
   }
 
-  public function update(Request $request, $id)
+  public function update(UpdateProjectRequest $request, $id)
   {
     $project = Project::find($id);
     if (!$project->isAuthorizedUser()) return;

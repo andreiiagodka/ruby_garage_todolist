@@ -94,7 +94,7 @@ function create() {
             headers: {
               'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
             },
-            success: function (data) {
+            success: function(data) {
               projects_container.append(data.contents);
               hideModal(modal);
               alertSuccess(success_phrases.project_store);

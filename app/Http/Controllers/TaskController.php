@@ -5,6 +5,10 @@
   use Illuminate\Http\Request;
   use Illuminate\Support\Facades\Auth;
   use App\Models\Task;
+  use App\Http\Requests\Task\StoreTaskRequest;
+  use App\Http\Requests\Task\UpdateTaskRequest;
+  use App\Http\Requests\Task\StatusTaskRequest;
+  use App\Http\Requests\Task\UpdateDeadlineTaskRequest;
   use Carbon\Carbon;
 
   class TaskController extends Controller
@@ -19,7 +23,7 @@
 
     }
 
-    public function store(Request $request)
+    public function store(StoreTaskRequest $request)
     {
       $project_id = $request->project_id;
       $max_position = Task::where('project_id', $project_id)->pluck('position')->max();
@@ -45,7 +49,7 @@
       return $this->handleShowEditResponse($id, 'tasks.edit-modal');
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateTaskRequest $request, $id)
     {
       $task = Task::find($id);
       if (!$task->isAuthorizedUser()) return;
@@ -60,7 +64,7 @@
       return $this->renderTaskPositions($task);
     }
 
-    public function status(Request $request, $id) {
+    public function status(StatusTaskRequest $request, $id) {
       $task = Task::find($id);
       if (!$task->isAuthorizedUser()) return;
       $task->status = intval($request->status == 0);
@@ -102,7 +106,7 @@
       return response()->json(['contents' => $contents]);
     }
 
-    public function deadlineUpdate(Request $request, $id) {
+    public function deadlineUpdate(UpdateDeadlineTaskRequest $request, $id) {
       $task = Task::find($id);
       if (!$task->isAuthorizedUser()) return;
       $task->update(['deadline' => $request->deadline]);
