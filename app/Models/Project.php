@@ -13,6 +13,10 @@
       return $this->hasMany(Task::class);
     }
 
+    public function getNameAttribute($value) {
+      return ucfirst($value);
+    }
+
     public function isAuthorizedUser() {
       $project_user_id = $this->user_id;
       $authorized_user_id = Auth::id();

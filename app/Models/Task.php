@@ -14,6 +14,10 @@
       return $this->belongsTo(Project::class);
     }
 
+    public function getNameAttribute($value) {
+      return ucfirst($value);
+    }
+
     public function getDeadlineAttribute($value) {
       return Carbon::parse($value)->format('d.m.Y H:i');
     }
