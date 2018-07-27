@@ -6,8 +6,10 @@
  */
 
 require('./bootstrap');
+require('../../../node_modules/jquery-validation/dist/jquery.validate.js');
 
 window.Vue = require('vue');
+window.JqueryValidation = require('../../../node_modules/jquery-validation/dist/jquery.validate.js');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -18,5 +20,5 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 const app = new Vue({
-    el: '#app' 
+    el: '#app'
 });
