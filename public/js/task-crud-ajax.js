@@ -1,12 +1,16 @@
 $(document).ready(function() {
+  createTask();
+  showTask();
+  editTask();
+  destroyTask();
+});
+
+function createTask() {
   $(document).on('click', '.btn-store-task-js', function() {
     let form = $(this).closest('form');
     validateStoreTask(form);
   });
-  show();
-  edit();
-  destroy();
-});
+}
 
 function storeTask(form) {
   let tasks_container = $(form).closest('.store-task-form-container-js').next('.todolist-tasks-container-js');
@@ -14,7 +18,6 @@ function storeTask(form) {
   let store_task_input = $(form).find('input[name=store_task_name]');
   let task_name = store_task_input.val();
   let project_id = $(form).attr('project_id');
-  let error_container = $(form).find('.errors-container-js');
   $.ajax({
     url: action,
     type: 'POST',
@@ -28,11 +31,12 @@ function storeTask(form) {
     success: function(data) {
       tasks_container.append(data.contents);
       store_task_input.val('');
+      emprtErrorContainer(form);
       addBtnDownOnStore(tasks_container, data.task_position);
       alertSuccess(success_phrases.task_store);
     },
     error: function(data) {
-      setError(error_container, data);
+      setError(form, data);
     }
   });
 }
@@ -46,7 +50,7 @@ function addBtnDownOnStore(tasks_container, position) {
   }
 }
 
-function show() {
+function showTask() {
   $(document).on('click', '.task-name-container-js', function() {
     let modal = $('#show_task_modal');
     let form = $(this).closest('.show-task-form-js');
@@ -65,7 +69,7 @@ function show() {
   });
 }
 
-function edit() {
+function editTask() {
   $(document).on('click', '.btn-open-edit-task-modal-js', function() {
     let modal = $('#edit_task_modal');
 
@@ -80,10 +84,7 @@ function edit() {
       },
       success: function(data) {
         modal.append(data.contents);
-        $('.btn-update-task-js').click(function() {
-          let form = $(this).closest('form');
-          validateUpdateTask(form, task_name_container, modal);
-        });
+        validateUpdateTask(task_name_container, modal);
         emptyHiddenModal(modal);
       }
     });
@@ -95,7 +96,6 @@ function updateTask(form, task_name_container, modal) {
   let update_task_input = $(form).find('input[name=update_task_name]');
   let new_task_name = update_task_input.val();
   let project_id = $(form).attr('project_id');
-  let error_container = $(form).find('.errors-container-js');
   $.ajax({
     url: action,
     type: 'PUT',
@@ -108,20 +108,21 @@ function updateTask(form, task_name_container, modal) {
     },
     success: function(data) {
       $(task_name_container).html(new_task_name);
+      task_name_container.css('textTransform', 'capitalize');
       hideModal(modal);
       alertSuccess(success_phrases.task_update);
     },
     error: function(data) {
-      setError(error_container, data);
+      setError(form, data);
     }
   });
 }
 
-function destroy() {
+function destroyTask() {
   $(document).on('click', '.btn-destroy-task-js', function() {
+    let task_container = $(this).closest('.task-container-js');
     let form = $(this).closest('.destroy-task-form-js');
     let action = form.attr('action');
-    let task_container = this.closest('.task-container-js');
     $.ajax({
       url: action,
       type: 'DELETE',

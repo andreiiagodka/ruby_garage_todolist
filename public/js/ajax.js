@@ -1,4 +1,4 @@
-function ajaxRequest(action, method, data, handleResponse) {
+function ajaxRequest(action, method, data, successResponse) {
   $.ajax({
     url: action,
     type: method,
@@ -7,7 +7,7 @@ function ajaxRequest(action, method, data, handleResponse) {
       'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
     },
     success: function (data) {
-      handleResponse;
+      successResponse;
     }
   });
 }
@@ -29,8 +29,14 @@ function btnHideShow(btn_hide, btn_show) {
   btn_show.show();
 }
 
-function setError(error_container, data) {
+function setError(form, data) {
   let response = data.responseJSON;
   let error = response.errors['name'];
+  let error_container = $(form).find('.errors-container-js');
   error_container.html(error);
+}
+
+function emprtErrorContainer(form) {
+  let error_container = $(form).find('.errors-container-js');
+  error_container.empty();
 }

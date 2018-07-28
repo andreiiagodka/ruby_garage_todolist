@@ -1,11 +1,11 @@
 $(document).ready(function() {
-  status();
-  deadlineEdit();
+  changeStatusTask();
+  editDeadlineTask();
   positionUp();
   positionDown();
 });
 
-function status() {
+function changeStatusTask() {
   $(document).on('click', '.cbx-status-task-js', function() {
     let form = $(this).closest('.status-task-form-js');
     let action = $(form).attr('action');
@@ -56,7 +56,8 @@ function positionUp() {
 
         if (prev_task_position == data.min_position) {
           btnHideShow(btn_up, prev_task_btn_up);
-        } else if (task_position == data.max_position) {
+        }
+        if (task_position == data.max_position) {
           btnHideShow(prev_task_btn_down, btn_down);
         }
       }
@@ -96,7 +97,8 @@ function positionDown() {
 
         if (next_task_position == data.max_position) {
           btnHideShow(btn_down, next_task_btn_down);
-        } else if (task_position == data.min_position) {
+        }
+        if (task_position == data.min_position) {
           btnHideShow(next_task_btn_up, btn_up);
         }
       }
@@ -104,7 +106,7 @@ function positionDown() {
   });
 }
 
-function deadlineEdit() {
+function editDeadlineTask() {
   $(document).on('click', '.btn-edit-task-deadline-js', function() {
     let btn_edit = $(this);
     let form = $(this).closest('.edit-task-deadline-form-js');
@@ -119,16 +121,23 @@ function deadlineEdit() {
       success: function(data) {
         deadline_info.append(data.contents);
         btn_edit.hide();
+        closeEditDeadlineForm();
         validateDeadlineUpdate(deadline_info, btn_edit);
       }
     });
   });
 }
 
-function deadlineUpdate(form, deadline_info, btn_edit) {
+function closeEditDeadlineForm() {
+  $('.btn-close-edit-task-deadline-js').click(function() {
+    let edit_form = $(this).closest('.deadline-form-container-js');
+    edit_form.remove();
+  });
+}
+
+function updateDeadlineTask(form, deadline_info, btn_edit) {
   let action = $(form).attr('action');
   let deadline = $(form).find('.deadline-update-input-js').val();
-  let error_container = $(form).find('.errors-container-js');
   $.ajax({
     url: action,
     type: 'POST',
@@ -139,8 +148,7 @@ function deadlineUpdate(form, deadline_info, btn_edit) {
       deadline: deadline
     },
     success: function(data) {
-      let date = new Date(deadline);
-      let new_deadline = date.toLocaleDateString() + ' ' + (date.toLocaleTimeString()).slice(0, -3);
+      let new_deadline = formatNewDate(deadline);
       let deadline_span = deadline_info.find('span.deadline-js');
       deadline_span.html(new_deadline);
       deadline_info.find('.deadline-form-container-js').remove();
@@ -149,16 +157,13 @@ function deadlineUpdate(form, deadline_info, btn_edit) {
     error: function(data) {
       let response = data.responseJSON;
       let error = response.errors['deadline'];
+      let error_container = $(form).find('.errors-container-js');
       error_container.html(error);
     }
   });
 }
 
-function handleDeadlineUpdateResponse(deadline, deadline_info, btn_edit) {
+function formatNewDate(deadline) {
   let date = new Date(deadline);
-  let new_deadline = date.toLocaleDateString() + ' ' + (date.toLocaleTimeString()).slice(0, -3);
-  let deadline_span = deadline_info.find('span.deadline-js');
-  deadline_span.html(new_deadline);
-  deadline_info.find('.deadline-form-container-js').remove();
-  btn_edit.show();
+  return date.toLocaleDateString() + ' ' + (date.toLocaleTimeString()).slice(0, -3);
 }
