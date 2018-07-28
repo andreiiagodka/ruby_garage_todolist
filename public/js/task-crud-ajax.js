@@ -1,35 +1,39 @@
 $(document).ready(function() {
-  store();
+  $(document).on('click', '.btn-store-task-js', function() {
+    let form = $(this).closest('form');
+    validateStoreTask(form);
+  });
   show();
   edit();
   destroy();
 });
 
-function store() {
-  $(document).on('click', '.btn-store-task-js', function() {
-    let tasks_container = $(this).closest('.store-task-form-container-js').next('.todolist-tasks-container-js');
-
-    let form = $(this).closest('.store-task-form-js');
-    let action = form.attr('action');
-    let store_task_input = form.find('input[name=store_task_name]');
-    let task_name = store_task_input.val();
-    let project_id = form.attr('project_id');
-    $.ajax({
-      url: action,
-      type: 'POST',
-      data: {
-        name: task_name,
-        project_id: project_id
-      },
-      headers: {
-        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-      }
-    }).done(function(data) {
+function storeTask(form) {
+  let tasks_container = $(form).closest('.store-task-form-container-js').next('.todolist-tasks-container-js');
+  let action = $(form).attr('action');
+  let store_task_input = $(form).find('input[name=store_task_name]');
+  let task_name = store_task_input.val();
+  let project_id = $(form).attr('project_id');
+  let error_container = $(form).find('.errors-container-js');
+  $.ajax({
+    url: action,
+    type: 'POST',
+    data: {
+      name: task_name,
+      project_id: project_id
+    },
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    },
+    success: function(data) {
       tasks_container.append(data.contents);
       store_task_input.val('');
       addBtnDownOnStore(tasks_container, data.task_position);
       alertSuccess(success_phrases.task_store);
-    });
+    },
+    error: function(data) {
+      setError(error_container, data);
+    }
   });
 }
 
@@ -76,29 +80,41 @@ function edit() {
       },
       success: function(data) {
         modal.append(data.contents);
-        update(task_name_container, modal);
+        $('.btn-update-task-js').click(function() {
+          let form = $(this).closest('form');
+          validateUpdateTask(form, task_name_container, modal);
+        });
         emptyHiddenModal(modal);
       }
     });
   });
 }
 
-function update(task_name_container, modal) {
-  $('.btn-update-task-js').click(function() {
-    let new_task_name = $('input[name=update_task_name]').val();
-    let action = $('.update-task-form-js').attr('action');
-    let method = 'PUT';
-    let data = {
-      name: new_task_name
-    };
-    ajaxRequest(action, method, data, handleUpdateResponse(task_name_container, new_task_name, modal));
+function updateTask(form, task_name_container, modal) {
+  let action = $(form).attr('action');
+  let update_task_input = $(form).find('input[name=update_task_name]');
+  let new_task_name = update_task_input.val();
+  let project_id = $(form).attr('project_id');
+  let error_container = $(form).find('.errors-container-js');
+  $.ajax({
+    url: action,
+    type: 'PUT',
+    data: {
+      name: new_task_name,
+      project_id: project_id
+    },
+    headers: {
+      'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+    },
+    success: function(data) {
+      $(task_name_container).html(new_task_name);
+      hideModal(modal);
+      alertSuccess(success_phrases.task_update);
+    },
+    error: function(data) {
+      setError(error_container, data);
+    }
   });
-}
-
-function handleUpdateResponse(name_container, name, modal) {
-  $(name_container).html(name);
-  hideModal(modal);
-  alertSuccess(success_phrases.task_update);
 }
 
 function destroy() {

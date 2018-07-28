@@ -20,4 +20,10 @@
         'deadline' => 'required|date|after_or_equal:' . $task->deadline
       ];
     }
+
+    public function messages() {
+      return [
+        'after_or_equal' => 'The deadline must be a date after or equal to current.'
+      ];
+    }
   }

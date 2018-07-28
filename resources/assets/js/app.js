@@ -9,7 +9,6 @@ require('./bootstrap');
 require('../../../node_modules/jquery-validation/dist/jquery.validate.js');
 
 window.Vue = require('vue');
-window.JqueryValidation = require('../../../node_modules/jquery-validation/dist/jquery.validate.js');
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

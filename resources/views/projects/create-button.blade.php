@@ -3,5 +3,4 @@
     <i class="fa fa-plus" aria-hidden="true"></i>
     Add TODO List
   </button>
-
 {{ Form::close() }}

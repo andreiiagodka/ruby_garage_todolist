@@ -13,9 +13,14 @@
 
     public function rules()
     {
-      $task = $this->route('task');
       return [
-        'name' => 'required|string|unique:tasks,name,' . $task . '|max:255'
+        'name' => 'required|string|unique:tasks,name,null,id,project_id,' . $this->project_id . '|max:255'
+      ];
+    }
+
+    public function messages() {
+      return [
+        'unique' => 'Such task name is already in use.'
       ];
     }
   }

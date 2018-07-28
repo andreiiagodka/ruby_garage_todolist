@@ -82,5 +82,6 @@
 <script src="{{ asset('js/project-crud-ajax.js') }}"></script>
 <script src="{{ asset('js/task-crud-ajax.js') }}"></script>
 <script src="{{ asset('js/task-extra-ajax.js') }}"></script>
+<script src="{{ asset('js/validation.js') }}"></script>
 </body>
 </html>

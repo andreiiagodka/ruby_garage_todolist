@@ -28,3 +28,9 @@ function btnHideShow(btn_hide, btn_show) {
   btn_hide.hide();
   btn_show.show();
 }
+
+function setError(error_container, data) {
+  let response = data.responseJSON;
+  let error = response.errors['name'];
+  error_container.html(error);
+}

@@ -18,4 +18,10 @@
         'project_id' => 'required|integer'
       ];
     }
+
+    public function messages() {
+      return [
+        'unique' => 'Such task name is already in use.'
+      ];
+    }
   }
