@@ -1,0 +1,51 @@
+.mt-50 {
+  margin-top: 50px;
+}
+
+.mb-25 {
+  margin-bottom: 25px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
+.color-white {
+  color: white;
+}
+
+body {
+  background-color: lightgreen;
+}
+
+.heading {
+  margin-bottom: 0;
+  font-size: 250%;
+  font-weight: bold;
+  color: black;
+}
+
+.subheading {
+  font-size: 150%;
+}
+
+.btn-add-todo {
+  width: 200px;
+  height: 50px;
+  background-color: #418bf2;
+  border: 1px solid #294c66;
+  border-radius: 2px;
+}
+
+.btn-descr {
+  font-size: 120%;
+  font-weight: bold;
+  color: white;
+}
+
+.fa-descr {
+  font-size: 250%;
+  vertical-align: middle;
+  color: #294c66;
+}
+

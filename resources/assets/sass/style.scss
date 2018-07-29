@@ -1,0 +1,67 @@
+@import "_cvariables";
+@import "_helpers";
+
+body {
+  background-color: lightgreen;
+}
+
+.heading {
+  margin-bottom: 0;
+  font-size: 250%;
+  font-weight: bold;
+  color: black;
+}
+
+.subheading {
+  font-size: 150%;
+}
+
+.btn-add-todo {
+  width: 200px;
+  height: 50px;
+  background-color: $custom_bgc;
+  border: 1px solid $fa_color;
+  border-radius: 2px;
+}
+
+.btn-descr {
+  font-size: 120%;
+  font-weight: bold;
+  color: white;
+}
+
+.fa-descr {
+  font-size: 250%;
+  vertical-align: middle;
+  color: $fa_color;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.f {
+
+}

@@ -9,6 +9,7 @@
   <title>{{ config('app.name', 'Laravel') }}</title>
 
   <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
   <div id="app">
@@ -73,6 +74,10 @@
       @yield('content')
     </div>
   </div>
+  <div class="footer mt-50">
+    <div class="row color-white text-center">
+      <span>&#169; Ruby Garage</span>
+    </div>
 </div>
 
 <!-- Scripts -->
