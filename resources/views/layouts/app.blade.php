@@ -76,7 +76,7 @@
       </div>
     </div>
   </div>
-  <div class="footer mt-50">
+  <div class="footer mt-50 mb-25">
     <div class="row color-white text-center">
       <span>&#169; Ruby Garage</span>
     </div>

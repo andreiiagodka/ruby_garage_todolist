@@ -1,16 +1,12 @@
 @import "_cvariables";
+@import "_project-styles";
+@import "_task-styles";
+@import "_fa-styles";
+@import "_inheritance";
 @import "_helpers";
 
-%va-middle {
-  vertical-align: middle;
-}
-
-%color-white {
-  color: white;
-}
-
 body {
-  background-color: lightgreen;
+  background: linear-gradient(white, #ddac25);
 }
 
 .heading {
@@ -24,127 +20,10 @@ body {
   font-size: 150%;
 }
 
-.btn-add-todo {
-  width: 200px;
-  height: 50px;
-  background-color: $custom_bgc;
-  border: 1px solid $fa_color;
-  border-radius: 2px;
-}
-
-.btn-descr {
-  font-size: 120%;
-  font-weight: bold;
-  color: white;
-}
-
-%fa-style {
-  @extend %va-middle;
-  color: $fa_color;
-}
-
-.fa-descr {
-  @extend %fa-style;
-  font-size: 250%;
-}
-
-.fa-calendar-project {
-  @extend %fa-style;
-  font-size: 200%;
-}
-
-%fa-crud {
-  @extend %va-middle;
-  opacity: 0.7;
-  font-size: 150%;
-}
-
-%fa-crud:hover {
-  opacity: 1;
-}
-
-.fa-crud-project {
-  @extend %fa-crud;
-  color: lightgray;
-}
-
-.fa-crud-task {
-  @extend %fa-crud;
-  color: gray;
-}
-
-.fa-caret-up-down {
-  @extend %fa-crud;
-  font-size: 200%;
-}
-
-.fa-task-create {
-  @extend %va-middle;
-  font-size: 250%;
-  color: $task_create;
-}
-
-.fa-crud-hidden {
-  visibility: hidden;
-}
-
-.panel-heading-custom:hover .fa-crud-hidden {
-  visibility: visible;
-}
-
-.task-container:hover {
-  background-color: #f2e8c1;
-}
-
-.task-container:hover .fa-crud-hidden {
-  visibility: visible;
-}
-
-.panel-primary > .panel-heading-custom {
-  height: 70px;
-  background-color: $custom_bgc;
-}
-
-.panel-primary {
-  border-bottom-left-radius: 20px 20px;
-  border-bottom-right-radius: 20px 20px;
-}
-
-.project-name {
-  @extend %va-middle;
-  font-size: 140%;
-  font-weight: bold;
-}
-
-.panel-task-create {
-  background-color: #e5e8e6;
-}
-
-.btn-add-task {
-  @extend %color-white;
-  background-color: $task_create;
-  width: 150px;
-}
-
 .form-errors {
   position: absolute;
   color: red;
   font-style: italic;
-}
-
-.task-container {
-  @extend %va-middle;
-  height: 80px;
-}
-
-.task-cbx {
-  height: 20px;
-  width: 20px;
-}
-
-.task-name {
-  font-size: 130%;
-  font-weight: bold;
 }
 
 

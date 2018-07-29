@@ -1,0 +1,65 @@
+%fa-darkblue-style {
+  vertical-align: middle;
+  color: $fa_color;
+}
+
+%fa-crud {
+  vertical-align: middle;
+  opacity: 0.7;
+}
+
+%fa-task-action {
+  @extend %fa-crud;
+  color: gray;
+}
+
+.fa-plus-project {
+  @extend %fa-darkblue-style;
+  font-size: 250%;
+}
+
+.fa-calendar-project {
+  @extend %fa-darkblue-style;
+  font-size: 220%;
+}
+
+.fa-plus-task {
+  vertical-align: middle;
+  font-size: 250%;
+  color: $task_create;
+}
+
+.fa-crud-project {
+  @extend %fa-crud;
+  font-size: 180%;
+  color: lightgray;
+}
+
+.fa-crud-project:hover {
+  opacity: 1;
+  font-size: 200%;
+}
+
+.fa-crud-task {
+  @extend %fa-task-action;
+  font-size: 150%;
+}
+
+.fa-crud-task:hover {
+  opacity: 1;
+  font-size: 180%;
+}
+
+.fa-caret-up-down {
+  @extend %fa-task-action;
+  font-size: 200%;
+}
+
+.fa-caret-up-down:hover {
+  opacity: 1;
+  font-size: 220%;
+}
+
+.fa-crud-hidden {
+  visibility: hidden;
+}

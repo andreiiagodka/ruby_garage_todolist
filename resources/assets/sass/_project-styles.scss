@@ -1,0 +1,37 @@
+.btn-add-project {
+  width: 200px;
+  height: 50px;
+  background-color: $panel_bgc;
+  border: 1px solid $fa_color;
+  border-radius: 2px;
+}
+
+.btn-description {
+  font-size: 120%;
+  font-weight: bold;
+  color: white;
+}
+
+.btn-add-project:hover .btn-description {
+  font-size: 130%;
+}
+
+.panel {
+  border-bottom-left-radius: 20px 20px;
+  border-bottom-right-radius: 20px 20px;
+}
+
+.panel > .panel-heading-custom {
+  background-color: $panel_bgc;
+  height: 70px;
+}
+
+.panel-heading-custom:hover .fa-crud-hidden {
+  visibility: visible;
+}
+
+.project-name {
+  vertical-align: middle;
+  font-size: 140%;
+  font-weight: bold;
+}

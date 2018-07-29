@@ -1,0 +1,38 @@
+.panel-task-create {
+  height: 75px;
+  background-color: $panel_task_create-bgc;
+}
+
+.btn-add-task {
+  width: 130px;
+  background-color: $task_create;
+  border: 1px solid green;
+  color: white;
+}
+
+.task-container {
+  vertical-align: middle;
+  height: 80px;
+}
+
+.task-container:hover {
+  background-color: $task_container_hover_bgc;
+}
+
+.task-container:hover .fa-crud-hidden {
+  visibility: visible;
+}
+
+.task-cbx {
+  height: 20px;
+  width: 20px;
+}
+
+.task-name {
+  font-size: 130%;
+  font-weight: bold;
+}
+
+.task-container:hover .task-name {
+  font-size: 140%;
+}
