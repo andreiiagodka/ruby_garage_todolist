@@ -10,7 +10,31 @@
   margin-right: 10px;
 }
 
+.mr-15 {
+  margin-right: 15px;
+}
+
 .color-white {
+  color: white;
+}
+
+.bl-1 {
+  border-left: 1px solid lightgray;
+}
+
+.va-mid {
+  vertical-align: middle;
+}
+
+.fa-descr,
+.fa-calendar-project,
+.fa-crud-project,
+.fa-task-create,
+.project-name {
+  vertical-align: middle;
+}
+
+.btn-add-task {
   color: white;
 }
 
@@ -32,7 +56,7 @@ body {
 .btn-add-todo {
   width: 200px;
   height: 50px;
-  background-color: #418bf2;
+  background-color: #3c6ebc;
   border: 1px solid #294c66;
   border-radius: 2px;
 }
@@ -43,9 +67,50 @@ body {
   color: white;
 }
 
+.fa-descr,
+.fa-calendar-project {
+  color: #294c66;
+}
+
 .fa-descr {
   font-size: 250%;
-  vertical-align: middle;
-  color: #294c66;
+}
+
+.fa-calendar-project {
+  font-size: 200%;
+}
+
+.fa-crud-project {
+  font-size: 150%;
+  color: lightgray;
+}
+
+.fa-task-create {
+  font-size: 250%;
+  color: #72cc8d;
+}
+
+.panel-primary > .panel-heading-custom {
+  background-color: #3c6ebc;
+}
+
+.project-name {
+  font-size: 120%;
+  font-weight: bold;
+}
+
+.panel-task-create {
+  background-color: #e5e8e6;
+}
+
+.btn-add-task {
+  background-color: #72cc8d;
+  width: 150px;
+}
+
+.form-errors {
+  position: absolute;
+  color: red;
+  font-style: italic;
 }
 

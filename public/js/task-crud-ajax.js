@@ -13,7 +13,7 @@ function createTask() {
 }
 
 function storeTask(form) {
-  let tasks_container = $(form).closest('.store-task-form-container-js').next('.todolist-tasks-container-js');
+  let tasks_container = $(form).closest('.panel-body').next().find('.todolist-tasks-container-js');
   let action = $(form).attr('action');
   let store_task_input = $(form).find('input[name=store_task_name]');
   let task_name = store_task_input.val();

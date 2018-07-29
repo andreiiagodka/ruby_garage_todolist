@@ -71,13 +71,16 @@
 
   <div class="container">
     <div class="row">
-      @yield('content')
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        @yield('content')
+      </div>
     </div>
   </div>
   <div class="footer mt-50">
     <div class="row color-white text-center">
       <span>&#169; Ruby Garage</span>
     </div>
+  </div>
 </div>
 
 <!-- Scripts -->
