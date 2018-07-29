@@ -36,6 +36,10 @@
   font-weight: bold;
 }
 
+.table-project {
+  table-layout: fixed;
+}
+
 .panel-task-create {
   height: 75px;
   background-color: #d4d5d6;
@@ -73,6 +77,14 @@
 
 .task-container:hover .task-name {
   font-size: 140%;
+}
+
+.table-task th {
+  width: 100px;
+}
+
+.table-task td {
+  width: 500px;
 }
 
 .fa-plus-project,
@@ -155,16 +167,16 @@
   margin-bottom: 25px;
 }
 
+.ml-15 {
+  margin-left: 15px;
+}
+
 .mr-10 {
   margin-right: 10px;
 }
 
 .mr-15 {
   margin-right: 15px;
-}
-
-.color-white {
-  color: white;
 }
 
 .bl-1-lightgray {
@@ -175,28 +187,8 @@
   border-left: 1px solid gray;
 }
 
-.br-1-gray {
-  border-right: 1px solid gray;
-}
-
-.bb-1-gray {
-  border-bottom: 1px solid gray;
-}
-
-.va-mid {
-  vertical-align: middle;
-}
-
-.pd-0 {
-  padding: 0px 0px 0px 0px;
-}
-
 .pd-l-0 {
   padding-left: 0px;
-}
-
-.pd-r-0 {
-  padding-right: 0px;
 }
 
 body {

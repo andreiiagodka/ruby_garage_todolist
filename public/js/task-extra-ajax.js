@@ -121,17 +121,18 @@ function editDeadlineTask() {
       success: function(data) {
         deadline_info.append(data.contents);
         btn_edit.hide();
-        closeEditDeadlineForm();
+        closeEditDeadlineForm(btn_edit);
         validateDeadlineUpdate(deadline_info, btn_edit);
       }
     });
   });
 }
 
-function closeEditDeadlineForm() {
+function closeEditDeadlineForm(btn_edit) {
   $('.btn-close-edit-task-deadline-js').click(function() {
     let edit_form = $(this).closest('.deadline-form-container-js');
     edit_form.remove();
+    btn_edit.show();
   });
 }
 
@@ -158,6 +159,7 @@ function updateDeadlineTask(form, deadline_info, btn_edit) {
       let response = data.responseJSON;
       let error = response.errors['deadline'];
       let error_container = $(form).find('.errors-container-js');
+      error_container.addClass('form-errors');
       error_container.html(error);
     }
   });

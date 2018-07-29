@@ -10,10 +10,18 @@
           <div class="form-group">
             <div class="input-group">
               <div class="table-responsive">
-                <table class="table table-striped table-hover">
+                <table class="table table-striped table-hover table-project">
                   <tr>
                     <th>Name</th>
                     <td>{{ $project->name }}</td>
+                  </tr>
+                  <tr>
+                    <th>Created</th>
+                    <td>{{ $project->created_at->diffForHumans() }}</td>
+                  </tr>
+                  <tr>
+                    <th>Updated</th>
+                    <td>{{ $project->updated_at->diffForHumans() }}</td>
                   </tr>
                 </table>
               </div>

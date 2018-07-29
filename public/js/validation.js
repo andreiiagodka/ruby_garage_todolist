@@ -1,5 +1,7 @@
 function validateStoreProject(modal) {
   $('.store-project-form-js').validate({
+    errorElement: 'span',
+    errorClass: 'form-errors',
     rules: {
       store_project_name: {
         required: true,
@@ -8,7 +10,7 @@ function validateStoreProject(modal) {
     },
     messages: {
       store_project_name: {
-        required: validation_phrases.project_requried,
+        required: validation_phrases.project_required,
         maxlength: validation_phrases.project_maxlength
       }
     },
@@ -23,6 +25,8 @@ function validateStoreProject(modal) {
 
 function validateUpdateProject(project_name, modal) {
   $('.update-project-form-js').validate({
+    errorElement: 'span',
+    errorClass: 'form-errors',
     rules: {
       update_project_name: {
         required: true,
@@ -31,7 +35,7 @@ function validateUpdateProject(project_name, modal) {
     },
     messages: {
       update_project_name: {
-        required: validation_phrases.project_requried,
+        required: validation_phrases.project_required,
         maxlength: validation_phrases.project_maxlength
       }
     },
@@ -46,6 +50,8 @@ function validateUpdateProject(project_name, modal) {
 
 function validateStoreTask(form) {
   form.validate({
+    errorElement: 'span',
+    errorClass: 'form-errors',
     rules: {
       store_task_name: {
         required: true,
@@ -54,7 +60,7 @@ function validateStoreTask(form) {
     },
     messages: {
       store_task_name: {
-        required: validation_phrases.task_requried,
+        required: validation_phrases.task_required,
         maxlength: validation_phrases.task_maxlength
       }
     },
@@ -69,6 +75,8 @@ function validateStoreTask(form) {
 
 function validateUpdateTask(task_name_container, modal) {
   $('.update-task-form-js').validate({
+    errorElement: 'span',
+    errorClass: 'form-errors',
     rules: {
       update_task_name: {
         required: true,
@@ -77,8 +85,8 @@ function validateUpdateTask(task_name_container, modal) {
     },
     messages: {
       update_task_name: {
-        required: 'Task name is required.',
-        maxlength: 'Task name has to be shorter.'
+        required: validation_phrases.task_required,
+        maxlength: validation_phrases.task_maxlength
       }
     },
     errorPlacement: function(error, element) {
@@ -92,6 +100,8 @@ function validateUpdateTask(task_name_container, modal) {
 
 function validateDeadlineUpdate(deadline_info, btn_edit) {
   $('.update-task-deadline-form-js').validate({
+    errorElement: 'span',
+    errorClass: 'form-errors',
     rules: {
       update_deadline: {
         required: true
@@ -113,6 +123,7 @@ function validateDeadlineUpdate(deadline_info, btn_edit) {
 
 function placeError(error, element) {
   let error_container = element.parents('form').find('.errors-container-js');
+  error_container.removeClass('form-errors');
   error_container.empty();
   error.appendTo(error_container);
 }
@@ -120,6 +131,6 @@ function placeError(error, element) {
 let validation_phrases = {
   project_required: 'Todo List name is required.',
   project_maxlength: 'Todo List name has to be shorter (max is 255 symbols).',
-  task_requried: 'Task name is required.',
+  task_required: 'Task name is required.',
   task_maxlength: 'Task name has to be shorter (max is 255 symbols).'
 }

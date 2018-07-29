@@ -33,10 +33,12 @@ function setError(form, data) {
   let response = data.responseJSON;
   let error = response.errors['name'];
   let error_container = $(form).find('.errors-container-js');
+  error_container.addClass('form-errors');
   error_container.html(error);
 }
 
-function emprtErrorContainer(form) {
+function emptyErrorContainer(form) {
   let error_container = $(form).find('.errors-container-js');
+  error_container.removeClass('form-errors')
   error_container.empty();
 }

@@ -31,7 +31,7 @@ function storeTask(form) {
     success: function(data) {
       tasks_container.append(data.contents);
       store_task_input.val('');
-      emprtErrorContainer(form);
+      emptyErrorContainer(form);
       addBtnDownOnStore(tasks_container, data.task_position);
       alertSuccess(success_phrases.task_store);
     },

@@ -52,7 +52,7 @@ function storeProject(form, modal) {
 function showProject() {
   $(document).on('click', '.project-name-container-js', function() {
     let modal = $('#show_project_modal')
-    let form = $(this).closest('.show-project-form-js');
+    let form = $(this).find('.show-project-form-js');
     let action = form.attr('action');
     $.ajax({
       url: action,

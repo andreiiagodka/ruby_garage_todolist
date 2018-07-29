@@ -9,8 +9,8 @@
         <div class="row">
           <div class="form-group">
             <div class="input-group">
-              <div class="table-responsive">
-                <table class="table table-striped table-hover">
+              <div class="table-responsive ">
+                <table class="table table-striped table-hover table-task">
                   <tr>
                     <th>Name</th>
                     <td>{{ $task->name }}</td>
@@ -18,17 +18,29 @@
                   <tr>
                     <th>Status</th>
                     @if ($task->status == 1)
-                    <td>Done</td>
+                    <td>Completed</td>
                     @else
                     <td>In process</td>
                     @endif
                   </tr>
                   <tr>
+                    <th>Created</th>
+                    <td>{{ $task->created_at->diffForHumans() }}</td>
+                  </tr>
+                  <tr>
+                    <th>Updated</th>
+                    <td>{{ $task->updated_at->diffForHumans() }}</td>
+                  </tr>
+                  <tr>
                     <th>Deadline</th>
                     <td class="deadline-info-js">
-                      <span class="deadline-js">{{ $task->deadline }}</span>
-                      {{ Form::open(['route' => ['tasks.deadline.edit', $task->id], 'class' => 'edit-task-deadline-form-js']) }}
-                        <button type="button" class="btn btn-default btn-xs btn-edit-task-deadline-js">Edit</button>
+                      {{ Form::open(['route' => ['tasks.deadline.edit', $task->id], 'class' => 'form-inline edit-task-deadline-form-js']) }}
+                      <div class="form-group">
+                        <div class="input-group">
+                          <span class="deadline-js">{{ $task->deadline }}</span>
+                          <button type="button" class="btn btn-default ml-15 btn-edit-task-deadline-js">Edit</button>
+                        </div>
+                      </div>
                       {{ Form::close() }}
                     </td>
                   </tr>

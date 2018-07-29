@@ -7,7 +7,7 @@
         <button type="submit" class="btn btn-add-task btn-store-task-js">Add task</button>
       </span>
     </div>
-    <span class="form-errors errors-container-js"></span>
+    <span class="errors-container-js"></span>
     {{ Form::close() }}
   </div>
 </div>
