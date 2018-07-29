@@ -8,19 +8,19 @@ $(document).ready(function() {
 function changeStatusTask() {
   $(document).on('click', '.cbx-status-task-js', function() {
     let form = $(this).closest('.status-task-form-js');
-    let action = $(form).attr('action');
+    let action = form.attr('action');
     let method = 'POST';
-    let task_bg = $(this).closest('.bg-task-js');
-    $(task_bg).hasClass('bg-success') ? value = 1 : value = 0;
+    let task_name = form.closest('.task-container').find('.task-name-js');
+    task_name.hasClass('text-success') ? value = 1 : value = 0;
     let data = {
       status: value
     }
-    ajaxRequest(action, method, data, handleStatusResponse(task_bg));
+    ajaxRequest(action, method, data, handleStatusResponse(task_name));
   });
 }
 
-function handleStatusResponse(task_bg) {
-  $(task_bg).toggleClass('bg-success');
+function handleStatusResponse(task_name) {
+  task_name.toggleClass('text-success');
   alertSuccess(success_phrases.task_status);
 }
 
