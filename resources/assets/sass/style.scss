@@ -1,0 +1,57 @@
+@import "_color-variables";
+@import "_project-styles";
+@import "_task-styles";
+@import "_fa-styles";
+@import "_helpers";
+
+body {
+  background: linear-gradient(white, #ddac25);
+}
+
+.heading {
+  margin-bottom: 0;
+  font-size: 250%;
+  font-weight: bold;
+  color: black;
+}
+
+.subheading {
+  font-size: 150%;
+}
+
+.form-errors {
+  position: absolute;
+  color: red;
+  font-style: italic;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.f {
+
+}
