@@ -116,7 +116,7 @@ function updateProject(project_name, modal) {
 }
 
 function destroyProject() {
-  $('.btn-destroy-project-js').click(function() {
+  $(document).on('click', '.btn-destroy-project-js', function() {
     let form = $(this).closest('.destroy-project-form-js');
     let action = form.attr('action');
     let method = 'DELETE';
