@@ -9,10 +9,10 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
   <style>
     html, body {
-      background-color: #fff;
+      background: linear-gradient(white, #ddac25);
       color: #636b6f;
       font-family: 'Raleway', sans-serif;
-      font-weight: 100;
+      font-weight: bold;
       height: 100vh;
       margin: 0;
     }
@@ -65,7 +65,7 @@
     @if (Route::has('login'))
     <div class="top-right links">
       @auth
-      <a href="{{ url('/projects') }}">Home</a>
+      <a href="{{ url('/projects') }}">Projects</a>
       @else
       <a href="{{ route('login') }}">Login</a>
       <a href="{{ route('register') }}">Register</a>
