@@ -28,12 +28,12 @@
       $project_id = $request->project_id;
       $max_position = Task::where('project_id', $project_id)->pluck('position')->max();
 
-      $task = new Task;
-      $task->name = $request->name;
-      $task->position = $max_position + 1;
-      $task->deadline = Carbon::now()->addDay();
-      $task->project_id = $project_id;
-      $task->save();
+      $task = Task::create([
+        'name' => $request->name,
+        'position' => $max_position + 1,
+        'deadline' => Carbon::now()->addDay(),
+        'project_id' => $project_id
+      ]);
 
       $contents = view('tasks.task', compact('task'))->render();
       return response()->json(['contents' => $contents, 'task_position' => $task->position]);
