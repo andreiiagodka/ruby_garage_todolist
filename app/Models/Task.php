@@ -22,12 +22,6 @@
       return Carbon::parse($value)->format('d.m.Y H:i');
     }
 
-    public function isAuthorizedUser() {
-      $task_user_id = $this->project->user_id;
-      $authorized_user_id = Auth::id();
-      return $task_user_id == $authorized_user_id;
-    }
-
     public function minPosition() {
       return $this->project->tasks->pluck('position')->min();
     }

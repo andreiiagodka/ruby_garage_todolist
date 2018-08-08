@@ -11,6 +11,10 @@ use App\Http\Requests\Project\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
+  public function __construct() {
+    $this->middleware('auth', ['only' => 'store', 'update', 'destroy']);
+  }
+
   public function index()
   {
     $user_id = Auth::id();
@@ -49,14 +53,12 @@ class ProjectController extends Controller
   public function update(UpdateProjectRequest $request, $id)
   {
     $project = Project::find($id);
-    if (!$project->isAuthorizedUser()) return;
     $project->update(['name' => $request->name]);
   }
 
   public function destroy($id)
   {
     $project = Project::find($id);
-    if (!$project->isAuthorizedUser()) return;
     $project->delete();
   }
 
