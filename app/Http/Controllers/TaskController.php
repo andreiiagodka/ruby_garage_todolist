@@ -20,14 +20,11 @@
 
     public function store(StoreTaskRequest $request)
     {
-      $project_id = $request->project_id;
-      $max_position = Task::where('project_id', $project_id)->pluck('position')->max();
-
       $task = Task::create([
         'name' => $request->name,
-        'position' => $max_position + 1,
+        'position' => Task::maxPositionByProjectId($request->project_id) + 1,
         'deadline' => Carbon::now()->addDay(),
-        'project_id' => $project_id
+        'project_id' => $request->project_id
       ]);
 
       $contents = view('tasks.task', compact('task'))->render();
@@ -59,8 +56,7 @@
 
     public function status(StatusTaskRequest $request, $id) {
       $task = Task::find($id);
-      $task->status = intval($request->status == 0);
-      $task->update();
+      $task->update(['status' => intval($request->status == 0)]);
       return $task->status;
     }
 
