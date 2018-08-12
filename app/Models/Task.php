@@ -3,7 +3,6 @@
   namespace App\Models;
 
   use Illuminate\Database\Eloquent\Model;
-  use Illuminate\Support\Facades\Auth;
   use Carbon\Carbon;
 
   class Task extends Model
@@ -28,5 +27,9 @@
 
     public function maxPosition() {
       return $this->project->tasks->pluck('position')->max();
+    }
+
+    public static function maxPositionByProjectId($project_id) {
+      return Task::where('project_id', $project_id)->pluck('position')->max() + 1;
     }
   }

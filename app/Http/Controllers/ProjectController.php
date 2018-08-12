@@ -17,8 +17,7 @@ class ProjectController extends Controller
 
   public function index()
   {
-    $user_id = Auth::id();
-    $projects = User::find($user_id)->projects;
+    $projects = User::find(Auth::id())->projects;
     return view('projects.index', compact('projects'));
   }
 
@@ -30,10 +29,9 @@ class ProjectController extends Controller
 
   public function store(StoreProjectRequest $request)
   {
-    $id = Auth::id();
     $project = Project::create([
       'name' => $request->name,
-      'user_id' => $id
+      'user_id' => Auth::id()
     ]);
 
     $contents = view('projects.project', compact('project'))->render();

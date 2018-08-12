@@ -22,7 +22,7 @@
     {
       $task = Task::create([
         'name' => $request->name,
-        'position' => Task::maxPositionByProjectId($request->project_id) + 1,
+        'position' => Task::maxPositionByProjectId($request->project_id),
         'deadline' => Carbon::now()->addDay(),
         'project_id' => $request->project_id
       ]);
@@ -61,25 +61,11 @@
     }
 
     public function positionUp(Request $request, $id) {
-      $current_task = Task::find($id);
-      $prev_task = Task::find($request->prev_task_id);
-
-      $current_task_position = $current_task->position;
-      $current_task->update(['position' => $prev_task->position]);
-      $prev_task->update(['position' => $current_task_position]);
-
-      return $this->renderTaskPositions($current_task);
+      return $this->positionUpDown($id, $request->prev_task_id);
     }
 
     public function positionDown(Request $request, $id) {
-      $current_task = Task::find($id);
-      $next_task = Task::find($request->next_task_id);
-
-      $current_task_position = $current_task->position;
-      $current_task->update(['position' => $next_task->position]);
-      $next_task->update(['position' => $current_task_position]);
-
-      return $this->renderTaskPositions($current_task);
+      return $this->positionUpDown($id, $request->next_task_id);
     }
 
     public function deadlineEdit($id) {
@@ -97,6 +83,17 @@
       $task = Task::find($id);
       $contents = view($view, compact('task'))->render();
       return response()->json(['contents' => $contents]);
+    }
+
+    protected function positionUpDown($current_task_id, $request_task_id) {
+      $current_task = Task::find($current_task_id);
+      $request_task = Task::find($request_task_id);
+
+      $current_task_position = $current_task->position;
+      $current_task->update(['position' => $request_task->position]);
+      $request_task->update(['position' => $current_task_position]);
+
+      return $this->renderTaskPositions($current_task);
     }
 
     protected function renderTaskPositions($task) {
