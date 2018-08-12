@@ -13,11 +13,13 @@ function createTask() {
 }
 
 function storeTask(form) {
-  let tasks_container = $(form).closest('.panel-body').next('.todolist-tasks-container-js');
+  let panel_body = $(form).closest('.panel-body');
+  let tasks_container = panel_body.next('.todolist-tasks-container-js');
   let action = $(form).attr('action');
   let store_task_input = $(form).find('input[name=store_task_name]');
   let task_name = store_task_input.val();
   let project_id = $(form).attr('project_id');
+  let project_footer = panel_body.nextAll('.project-footer-js');
   $.ajax({
     url: action,
     type: 'POST',
@@ -31,6 +33,7 @@ function storeTask(form) {
     success: function(data) {
       tasks_container.append(data.contents);
       store_task_input.val('');
+      project_footer.empty();
       emptyErrorContainer(form);
       addBtnDownOnStore(tasks_container, data.task_position);
       alertSuccess(success_phrases.task_store);

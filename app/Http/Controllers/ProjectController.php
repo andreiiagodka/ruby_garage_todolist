@@ -29,7 +29,7 @@ class ProjectController extends Controller
 
   public function store(StoreProjectRequest $request)
   {
-    $project = Project::create([
+    $project = Project::create([ 
       'name' => $request->name,
       'user_id' => Auth::id()
     ]);
