@@ -24,6 +24,12 @@ function emptyHiddenModal(modal_id) {
   });
 }
 
+function toggleEmptyProjectMessage(task_position, empty_project_msg) {
+  if (task_position == 1) {
+    empty_project_msg.toggle('hidden');
+  }
+}
+
 function btnHideShow(btn_hide, btn_show) {
   btn_hide.hide();
   btn_show.show();

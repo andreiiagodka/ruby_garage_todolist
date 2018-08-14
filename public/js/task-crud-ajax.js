@@ -19,7 +19,7 @@ function storeTask(form) {
   let store_task_input = $(form).find('input[name=store_task_name]');
   let task_name = store_task_input.val();
   let project_id = $(form).attr('project_id');
-  let project_footer = panel_body.nextAll('.project-footer-js');
+  let empty_project_msg = panel_body.nextAll('.project-footer-js').find('.empty-project-msg-js');
   $.ajax({
     url: action,
     type: 'POST',
@@ -33,7 +33,7 @@ function storeTask(form) {
     success: function(data) {
       tasks_container.append(data.contents);
       store_task_input.val('');
-      project_footer.empty();
+      toggleEmptyProjectMessage(data.task_position, empty_project_msg)
       emptyErrorContainer(form);
       addBtnDownOnStore(tasks_container, data.task_position);
       alertSuccess(success_phrases.task_store);
@@ -124,6 +124,7 @@ function updateTask(form, task_name_container, modal) {
 function destroyTask() {
   $(document).on('click', '.btn-destroy-task-js', function() {
     let task_container = $(this).closest('.task-container-js');
+    let empty_project_msg = $(this).closest('.todolist-tasks-container-js').next().find('.empty-project-msg-js');
     let form = $(this).closest('.destroy-task-form-js');
     let action = form.attr('action');
     $.ajax({
@@ -133,6 +134,7 @@ function destroyTask() {
         'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
       },
       success: function(data) {
+        toggleEmptyProjectMessage(data.task_position, empty_project_msg)
         addBtnUpDownOnDestroy(task_container, data);
         handleDestroyResponse(task_container);
       }
