@@ -14,8 +14,7 @@
 
     public function rules()
     {
-      $task_id = $this->route('task');
-      $task = Task::find($task_id);
+      $task = Task::find($this->route('task'));
       return [
         'deadline' => 'required|date|after_or_equal:' . $task->deadline
       ];

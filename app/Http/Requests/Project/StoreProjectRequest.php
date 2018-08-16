@@ -14,9 +14,8 @@
 
     public function rules()
     {
-      $user_id = Auth::id();
       return [
-        'name' => 'required|string|unique:projects,name,null,id,user_id,' . $user_id . '|max:255'
+        'name' => 'required|string|unique:projects,name,null,id,user_id,' . Auth::id() . '|max:255'
       ];
     }
 
