@@ -111,7 +111,6 @@ function updateTask(form, task_name_container, modal) {
     },
     success: function(data) {
       $(task_name_container).html(new_task_name);
-      task_name_container.css('textTransform', 'capitalize');
       hideModal(modal);
       alertSuccess(success_phrases.task_update);
     },
