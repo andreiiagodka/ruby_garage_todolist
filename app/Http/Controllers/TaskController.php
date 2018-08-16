@@ -5,8 +5,8 @@
   use Illuminate\Http\Request;
   use Illuminate\Support\Facades\Auth;
   use App\Models\Task;
+  use App\Http\Requests\UpdateNameRequest;
   use App\Http\Requests\Task\StoreTaskRequest;
-  use App\Http\Requests\Task\UpdateTaskRequest;
   use App\Http\Requests\Task\StatusTaskRequest;
   use App\Http\Requests\Task\UpdateDeadlineTaskRequest;
   use Carbon\Carbon;
@@ -41,9 +41,10 @@
       return $this->handleShowEditResponse($id, 'tasks.edit-modal');
     }
 
-    public function update(UpdateTaskRequest $request, $id)
+    public function update(UpdateNameRequest $request, $id)
     {
       $task = Task::find($id);
+      Task::validateUniqueName($task, $request);
       $task->update(['name' => $request->name]);
     }
 

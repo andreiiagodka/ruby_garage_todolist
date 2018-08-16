@@ -28,4 +28,9 @@
     public static function maxPositionByProjectId($project_id) {
       return Task::where('project_id', $project_id)->pluck('position')->max() + 1;
     }
+
+    public static function validateUniqueName($task, $request) {
+      if (strtolower($task->name) == strtolower($request->name)) return;
+      $this->validate($request, ['name' => 'unique:tasks,name,null,id,project_id,' . $request->project_id]);
+    }
   }
