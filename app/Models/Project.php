@@ -11,8 +11,4 @@
     public function tasks() {
       return $this->hasMany(Task::class);
     }
-
-    public function getNameAttribute($value) {
-      return ucfirst($value);
-    }
   }
