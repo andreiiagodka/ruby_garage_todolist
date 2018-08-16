@@ -13,7 +13,7 @@ use App\Http\Requests\Project\StoreProjectRequest;
 class ProjectController extends Controller
 {
   public function __construct() {
-    $this->middleware('auth', ['only' => 'store', 'update', 'destroy']);
+    $this->middleware('auth');
   }
 
   public function index()

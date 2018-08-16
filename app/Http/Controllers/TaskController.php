@@ -14,12 +14,12 @@
   class TaskController extends Controller
   {
     public function __construct() {
-      $this->middleware('auth', ['only' => 'store', 'update', 'destroy',
-      'status', 'positionUp', 'positionDown', 'deadlineUpdate']);
+      $this->middleware('auth');
     }
 
     public function store(StoreTaskRequest $request)
     {
+      $this->authorize('store', Task::class);
       $task = Task::create([
         'name' => $request->name,
         'position' => Task::maxPositionByProjectId($request->project_id),
