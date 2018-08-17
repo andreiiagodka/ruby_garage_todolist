@@ -5,6 +5,7 @@
   use Illuminate\Http\Request;
   use Illuminate\Support\Facades\Auth;
   use App\Models\Task;
+  use App\Models\Project;
   use App\Http\Requests\UpdateNameRequest;
   use App\Http\Requests\Task\StoreTaskRequest;
   use App\Http\Requests\Task\StatusTaskRequest;
@@ -19,7 +20,8 @@
 
     public function store(StoreTaskRequest $request)
     {
-      $this->authorize('store', Task::class);
+      $project = Project::find($request->project_id);
+      if (Auth::id() != $project->user_id) return;
       $task = Task::create([
         'name' => $request->name,
         'position' => Task::maxPositionByProjectId($request->project_id),
