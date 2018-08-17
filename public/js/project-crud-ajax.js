@@ -105,7 +105,6 @@ function updateProject(project_name, modal) {
     },
     success: function(data) {
       $(project_name).html(new_project_name);
-      project_name.css('textTransform', 'capitalize');
       hideModal(modal);
       alertSuccess(success_phrases.project_update);
     },

@@ -6,7 +6,7 @@
   <div class="row mb-25">
     <div class="todolist-projects-container-js">
       @foreach ($projects as $project)
-      @include('projects.project', ['min_position' => 'min_position'])
+        @include('projects.project', ['min_position' => 'min_position'])
       @endforeach
     </div>
   </div>
