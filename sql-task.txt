@@ -1,0 +1,9 @@
+1)select distinct tasks.status from tasks order by tasks.status;
+2)select projects.name, count(tasks.project_id) from projects left join tasks on projects.id=tasks.project_id group by projects.id order by count(tasks.project_id) desc;
+3)select projects.name, count(tasks.project_id) from projects left join tasks on projects.id=tasks.project_id group by projects.name;
+4)select * from projects left join tasks on projects.id=tasks.project_id where tasks.name like 'N%';
+5)select projects.name, count(tasks.project_id) from projects join tasks on projects.id=tasks.project_id group by projects.id having projects.name like '_%a%_';
+6)select tasks.name from tasks group by tasks.name asc having count(*) >= 2;
+7)select tasks.name, projects.name from projects inner join tasks on tasks.project_id=projects.id group by tasks.name, tasks.status, projects.name having count(*) > 1 and projects.name='Garage' order by count(*);
+8)select projects.name from projects inner join tasks on projects.id=tasks.project_id group by projects.name, projects.id, tasks.status having count(tasks.status) > 10 and tasks.status=true order by projects.id;
+
