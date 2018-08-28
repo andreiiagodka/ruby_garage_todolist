@@ -35,7 +35,8 @@
       </div>
     </div>
     @include('tasks.index')
-    <div class="panel-body"></div>
+    <div class="panel-body text-center project-footer-js">
+      @include('projects.empty-project-message')
     </div>
   </div>
 </div>

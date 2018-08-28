@@ -24,6 +24,12 @@ function emptyHiddenModal(modal_id) {
   });
 }
 
+function toggleEmptyProjectMessage(task_position, empty_project_msg) {
+  if (task_position == 1) {
+    empty_project_msg.toggle('hidden');
+  }
+}
+
 function btnHideShow(btn_hide, btn_show) {
   btn_hide.hide();
   btn_show.show();
@@ -33,12 +39,11 @@ function setError(form, data) {
   let response = data.responseJSON;
   let error = response.errors['name'];
   let error_container = $(form).find('.errors-container-js');
-  error_container.addClass('form-errors');
-  error_container.html(error);
+  error_container.empty();
+  error_container.append("<span class='form-errors'>" + error + "</span>");
 }
 
 function emptyErrorContainer(form) {
   let error_container = $(form).find('.errors-container-js');
-  error_container.removeClass('form-errors')
   error_container.empty();
 }

@@ -5,12 +5,12 @@ function alertSuccess(phrase) {
 }
 
 function alert(alert_container, message_container, phrase) {
-  alert_container.toggleClass('hidden');
+  alert_container.removeClass('hidden');
   message_container.html(phrase);
   setInterval(function(){
     alert_container.addClass('hidden');
     message_container.html('');
-  }, 2000);
+  }, 5000);
 }
 
 let success_phrases = {

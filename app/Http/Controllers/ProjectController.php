@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Project;
+use App\Http\Requests\UpdateNameRequest;
 use App\Http\Requests\Project\StoreProjectRequest;
-use App\Http\Requests\Project\UpdateProjectRequest;
 
 class ProjectController extends Controller
 {
+  public function __construct() {
+    $this->middleware('auth');
+  }
+
   public function index()
   {
-    $user_id = Auth::id();
-    $projects = User::find($user_id)->projects;
+    $projects = User::find(Auth::id())->projects;
     return view('projects.index', compact('projects'));
   }
 
@@ -26,11 +30,10 @@ class ProjectController extends Controller
 
   public function store(StoreProjectRequest $request)
   {
-    $id = Auth::id();
-    $project = new Project;
-    $project->name = $request->name;
-    $project->user_id = $id;
-    $project->save();
+    $project = Project::create([
+      'name' => $request->name,
+      'user_id' => Auth::id()
+    ]);
 
     $contents = view('projects.project', compact('project'))->render();
     return response()->json(['contents' => $contents]);
@@ -46,17 +49,16 @@ class ProjectController extends Controller
     return $this->handleShowEditResponse($id, 'projects.edit-modal');
   }
 
-  public function update(UpdateProjectRequest $request, $id)
+  public function update(UpdateNameRequest $request, $id)
   {
     $project = Project::find($id);
-    if (!$project->isAuthorizedUser()) return;
+    Project::validateUniqueName($project, $request);
     $project->update(['name' => $request->name]);
   }
 
   public function destroy($id)
   {
     $project = Project::find($id);
-    if (!$project->isAuthorizedUser()) return;
     $project->delete();
   }
 

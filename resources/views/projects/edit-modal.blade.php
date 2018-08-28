@@ -13,7 +13,7 @@
                 <div class="input-group-addon">TODO List Name</div>
                 {{ Form::text('update_project_name', $project->name, ['class' => 'form-control']) }}
               </div>
-              <span class="errors-container-js"></span>
+              <div class="errors-container-js"></div>
             </div>
           </div>
         </div>

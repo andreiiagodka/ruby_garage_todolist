@@ -3,7 +3,6 @@
   namespace App\Models;
 
   use Illuminate\Database\Eloquent\Model;
-  use Illuminate\Support\Facades\Auth;
   use Carbon\Carbon;
 
   class Task extends Model
@@ -14,18 +13,8 @@
       return $this->belongsTo(Project::class);
     }
 
-    public function getNameAttribute($value) {
-      return ucfirst($value);
-    }
-
     public function getDeadlineAttribute($value) {
       return Carbon::parse($value)->format('d.m.Y H:i');
-    }
-
-    public function isAuthorizedUser() {
-      $task_user_id = $this->project->user_id;
-      $authorized_user_id = Auth::id();
-      return $task_user_id == $authorized_user_id;
     }
 
     public function minPosition() {
@@ -34,5 +23,14 @@
 
     public function maxPosition() {
       return $this->project->tasks->pluck('position')->max();
+    }
+
+    public static function maxPositionByProjectId($project_id) {
+      return Task::where('project_id', $project_id)->pluck('position')->max() + 1;
+    }
+
+    public static function validateUniqueName($task, $request) {
+      if (strtolower($task->name) == strtolower($request->name)) return;
+      $this->validate($request, ['name' => 'unique:tasks,name,null,id,project_id,' . $request->project_id]);
     }
   }

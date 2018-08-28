@@ -123,7 +123,6 @@ function validateDeadlineUpdate(deadline_info, btn_edit) {
 
 function placeError(error, element) {
   let error_container = element.parents('form').find('.errors-container-js');
-  error_container.removeClass('form-errors');
   error_container.empty();
   error.appendTo(error_container);
 }
